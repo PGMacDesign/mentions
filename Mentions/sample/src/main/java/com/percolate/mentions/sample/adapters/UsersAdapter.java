@@ -1,8 +1,9 @@
 package com.percolate.mentions.sample.adapters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -77,7 +78,7 @@ public class UsersAdapter extends RecyclerArrayAdapter<User, UsersAdapter.UserVi
             highlightSearchQueryInUserName(holder.name.getText());
             if (StringUtils.isNotBlank(mentionsUser.getImageUrl())) {
                 holder.imageView.setVisibility(View.VISIBLE);
-                Picasso.with(context)
+                Picasso.get()
                         .load(mentionsUser.getImageUrl())
                         .into(holder.imageView);
             } else {

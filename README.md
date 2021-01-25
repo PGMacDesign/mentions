@@ -1,12 +1,32 @@
 # Mentions
 
-[![Circle CI](https://circleci.com/gh/percolate/mentions.svg?style=svg&circle-token=82fa2c37e303a6d5c44baa2e64199d6b06141aaf)](https://circleci.com/gh/percolate/mentions)
-[![codecov.io](http://codecov.io/github/percolate/mentions/coverage.svg?branch=master&token=U8DlJgcAzs)](http://codecov.io/github/percolate/mentions?branch=master)
-[![](https://jitpack.io/v/percolate/mentions.svg)](https://jitpack.io/#percolate/mentions)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/26fc38f55811459aa2b4c3b4cfbe080d)](https://www.codacy.com/app/mohit-sarveiya/mentions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=percolate/mentions&amp;utm_campaign=Badge_Grade)
+[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)    [![API](https://img.shields.io/badge/API-15%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=15)    [![JitPack](https://jitpack.io/v/pgmacdesign/mentions.svg)](https://jitpack.io/#pgmacdesign/mentions)    [![Build Status](https://travis-ci.org/PGMacDesign/mentions.svg?branch=master)](https://travis-ci.org/PGMacDesign/mentions)    ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)    <img src="https://img.shields.io/badge/license-Apache 2.0-green.svg?style=flat">
+
 
 This library provides a simple and customizable away to setup @ mentions on any
 EditText. Here's all it takes to get started.
+
+## Installation
+
+To install, insert this into your projects root build.gradle file
+
+```groovy
+allprojects {
+    repositories {
+        jcenter()
+        google()
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+    }
+}
+```
+
+And include this in your dependencies section of your module .gradle file:
+
+```groovy
+implementation ('com.github.PGMacDesign:mentions:1.0.0')
+```
+
 
 ## Usage Examples
 
@@ -88,14 +108,6 @@ for (Mentionable mention : mentions) {
   filter and search for mentions. For example, if the user types @Tes, the
   callback will receive "Tes" as the query.
 
-## Adding to your application
-
-Simply add Mentions as a gradle dependency.  Distribution is done through
-jitpack.io.
-
-See <https://jitpack.io/com/github/percolate/mentions/> for instructions
-
-[![](https://jitpack.io/v/percolate/mentions.svg)](https://jitpack.io/#percolate/mentions)
 
 ## Running Tests
 
