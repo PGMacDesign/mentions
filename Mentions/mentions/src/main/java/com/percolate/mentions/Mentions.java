@@ -6,6 +6,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.ColorInt;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +109,7 @@ public class Mentions {
          *
          * @param color     int     The color to use to highlight a {@link Mentionable}'s text.
          */
-        public Builder highlightColor(final int color) {
+        public Builder highlightColor(@ColorInt final int color) {
             mentionsLib.mentionInsertionLogic.setTextHighlightColor(color);
             return this;
         }
