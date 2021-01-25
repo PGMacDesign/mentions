@@ -1,6 +1,6 @@
 # Mentions
 
-[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)    [![API](https://img.shields.io/badge/API-15%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=15)    [![JitPack](https://jitpack.io/v/pgmacdesign/mentions.svg)](https://jitpack.io/#pgmacdesign/mentions)    [![Build Status](https://travis-ci.org/PGMacDesign/mentions.svg?branch=master)](https://travis-ci.org/PGMacDesign/mentions)    ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)    <img src="https://img.shields.io/badge/license-Apache 2.0-green.svg?style=flat">
+[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)    [![API](https://img.shields.io/badge/API-15%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=16)    [![JitPack](https://jitpack.io/v/pgmacdesign/mentions.svg)](https://jitpack.io/#pgmacdesign/mentions)    [![Build Status](https://travis-ci.org/PGMacDesign/mentions.svg?branch=master)](https://travis-ci.org/PGMacDesign/mentions)    ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)    <img src="https://img.shields.io/badge/license-Apache 2.0-green.svg?style=flat">
 
 
 This library provides a simple and customizable away to setup @ mentions on any
