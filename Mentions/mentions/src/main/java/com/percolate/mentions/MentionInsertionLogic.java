@@ -1,6 +1,8 @@
 package com.percolate.mentions;
 
 import androidx.core.content.ContextCompat;
+
+import android.content.res.Resources;
 import android.text.InputType;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
@@ -211,8 +213,13 @@ class MentionInsertionLogic {
                     final int end = start + mention.getMentionLength();
                     if (editText.length() >= end && StringUtils.equals(editText.getText()
                             .subSequence(start, end), mention.getMentionName())) {
-                        ForegroundColorSpan highlightSpan = new ForegroundColorSpan(
-                                ContextCompat.getColor(editText.getContext(), textHighlightColor));
+	                    ForegroundColorSpan highlightSpan;
+                        try {
+	                        highlightSpan = new ForegroundColorSpan(textHighlightColor);
+                        } catch (Resources.NotFoundException nfe){
+	                        highlightSpan = new ForegroundColorSpan(
+			                        ContextCompat.getColor(editText.getContext(), textHighlightColor));
+                        }
                         editText.getEditableText().setSpan(highlightSpan, start, end,
                                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     } else {

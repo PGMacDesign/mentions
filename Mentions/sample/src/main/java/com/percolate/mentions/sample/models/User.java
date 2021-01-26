@@ -24,8 +24,8 @@ public class User {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
-    public String getFirstName() {
+	
+	public String getFirstName() {
         return firstName;
     }
 
