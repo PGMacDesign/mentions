@@ -10,6 +10,7 @@ import java.util.Collection;
 /**
  * A RecyclerArrayAdapter implementation very similar to an ArrayAdapter.  This was taken from the sample provided in the StickyHeadersRecyclerView library.
  * https://github.com/timehop/sticky-headers-recyclerview/blob/master/sample/src/main/java/com/timehop/stickyheadersrecyclerview/sample/RecyclerArrayAdapter.java
+ * Updated Pull from: https://github.com/percolate/mentions/blob/master/Mentions/sample/src/main/java/com/percolate/mentions/sample/adapters/RecyclerArrayAdapter.java
  */
 @SuppressWarnings("unchecked")
 public abstract class RecyclerArrayAdapter<M, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
