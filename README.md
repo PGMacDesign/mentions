@@ -23,7 +23,7 @@ allprojects {
 And include this in your dependencies section of your module .gradle file:
 
 ```groovy
-implementation ('com.github.PGMacDesign:mentions:1.0.0')
+implementation ('com.github.PGMacDesign:mentions:1.1.0')
 ```
 
 
