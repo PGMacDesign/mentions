@@ -3,9 +3,12 @@ package com.percolate.mentions;
 import androidx.core.content.ContextCompat;
 
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.text.InputType;
 import android.text.Spannable;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -36,9 +39,15 @@ class MentionInsertionLogic {
      */
     @SuppressWarnings("WeakerAccess")
     protected int textHighlightColor;
+    private boolean shouldBoldName;
+    private boolean shouldItalicizeName;
+    private boolean shouldHighlightBackgroundInstead;
 
     MentionInsertionLogic(final EditText editText) {
         this.editText = editText;
+        this.shouldBoldName = false;
+        this.shouldItalicizeName = false;
+        this.shouldHighlightBackgroundInstead = false;
         this.mentions = new ArrayList<>();
         this.textHighlightColor = R.color.mentions_default_color;
     }
@@ -76,6 +85,36 @@ class MentionInsertionLogic {
      */
     void setTextHighlightColor(final int textHighlightColor) {
         this.textHighlightColor = textHighlightColor;
+    }
+	
+	/**
+	 *
+	 * @param bool
+	 */
+	void setHighlightToBackground(boolean bool){
+	    this.shouldHighlightBackgroundInstead = bool;
+    }
+    
+    /**
+     * Set the mentions name to a bold Typeface. Defaults to false
+     * Note, will work in conjunction with {@link #setMentionsToItalic(boolean)}
+     *
+     * @param shouldBeBold Whether or not the {@link Mentions}'s text typeface should be bold
+     *                     for users that have been @'ed
+     */
+    void setMentionsToBold(boolean shouldBeBold) {
+        this.shouldBoldName = shouldBeBold;
+    }
+
+    /**
+     * Set the mentions name to a Italic Typeface. Defaults to false
+     * Note, will work in conjunction with {@link #setMentionsToBold(boolean)}
+     *
+     * @param shouldBeItalic Whether or not the {@link Mentions}'s text typeface should be italic
+     *                     for users that have been @'ed
+     */
+    void setMentionsToItalic(boolean shouldBeItalic) {
+        this.shouldItalicizeName = shouldBeItalic;
     }
 
     /**
@@ -198,30 +237,56 @@ class MentionInsertionLogic {
     private void highlightMentionsText() {
         // Clear current highlighting (note: just using clearSpans(); makes EditText fields act
         // strange).
-        final ForegroundColorSpan[] spans = editText.getEditableText().getSpans(0,
-                editText.getText().length(), ForegroundColorSpan.class);
+        final ForegroundColorSpan[] spans = this.editText.getEditableText().getSpans(0,
+		        this.editText.getText().length(), ForegroundColorSpan.class);
         for (ForegroundColorSpan span : spans) {
-            editText.getEditableText().removeSpan(span);
+	        this.editText.getEditableText().removeSpan(span);
         }
 
-        if (!mentions.isEmpty()) {
-            for (Iterator<Mentionable> iterator = mentions.iterator(); iterator.hasNext(); ) {
+        if (!this.mentions.isEmpty()) {
+            for (Iterator<Mentionable> iterator = this.mentions.iterator(); iterator.hasNext(); ) {
                 final Mentionable mention = iterator.next();
 
                 try {
                     final int start = mention.getMentionOffset();
                     final int end = start + mention.getMentionLength();
-                    if (editText.length() >= end && StringUtils.equals(editText.getText()
+                    if (this.editText.length() >= end && StringUtils.equals(editText.getText()
                             .subSequence(start, end), mention.getMentionName())) {
-	                    ForegroundColorSpan highlightSpan;
-                        try {
-	                        highlightSpan = new ForegroundColorSpan(textHighlightColor);
-                        } catch (Resources.NotFoundException nfe){
-	                        highlightSpan = new ForegroundColorSpan(
-			                        ContextCompat.getColor(editText.getContext(), textHighlightColor));
-                        }
-                        editText.getEditableText().setSpan(highlightSpan, start, end,
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    	if(this.shouldHighlightBackgroundInstead){
+		                    BackgroundColorSpan highlightSpan;
+		                    try {
+			                    highlightSpan = new BackgroundColorSpan(this.textHighlightColor);
+		                    } catch (Resources.NotFoundException nfe){
+			                    highlightSpan = new BackgroundColorSpan(
+					                    ContextCompat.getColor(editText.getContext(), this.textHighlightColor));
+		                    }
+		                    this.editText.getEditableText().setSpan(highlightSpan, start, end,
+				                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	                    } else {
+		                    ForegroundColorSpan highlightSpan;
+		                    try {
+			                    highlightSpan = new ForegroundColorSpan(this.textHighlightColor);
+		                    } catch (Resources.NotFoundException nfe){
+			                    highlightSpan = new ForegroundColorSpan(
+					                    ContextCompat.getColor(editText.getContext(), this.textHighlightColor));
+		                    }
+		                    this.editText.getEditableText().setSpan(highlightSpan, start, end,
+				                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	                    }
+                    	if(this.shouldBoldName || this.shouldItalicizeName){
+		                    StyleSpan styleSpan = null;
+		                    if(this.shouldItalicizeName && this.shouldBoldName){
+			                    styleSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+		                    } else if (this.shouldBoldName){
+			                    styleSpan = new StyleSpan(Typeface.BOLD);
+		                    } else if (this.shouldItalicizeName){
+			                    styleSpan = new StyleSpan(Typeface.ITALIC);
+		                    }
+		                    if(styleSpan != null) {
+			                    this.editText.getEditableText().setSpan(styleSpan, start, end,
+					                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		                    }
+	                    }
                     } else {
                         //Something went wrong.  The expected text that we're trying to highlight does
                         // not match the actual text at that position.

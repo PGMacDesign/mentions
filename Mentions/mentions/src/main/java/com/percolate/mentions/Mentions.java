@@ -115,6 +115,53 @@ public class Mentions {
         }
 
         /**
+         * The default highlighting is a {@link android.text.style.ForegroundColorSpan} which
+         * can be too bright or obtrusive depending on your color chosen / background.
+         * This will allow you to instead set the highlighting to be in the background.
+         * Note, if you want to go back to the foreground option, just call:
+         * {@link #setHighlightToForeground()}
+         */
+        public Builder setHighlightToBackground() {
+            mentionsLib.mentionInsertionLogic.setHighlightToBackground(true);
+            return this;
+        }
+
+        /**
+         * The default highlighting is a {@link android.text.style.ForegroundColorSpan} which
+         * can be too bright or obtrusive depending on your color chosen / background.
+         * This will allow switch it back to the default foreground highlight
+         *
+         */
+        public Builder setHighlightToForeground() {
+            mentionsLib.mentionInsertionLogic.setHighlightToBackground(false);
+            return this;
+        }
+
+        /**
+         * Set the mentions to a bold Typeface. Defaults to false
+         * Note, this does work in conjunction with {@link #setMentionsToItalic(boolean)}
+         *
+         * @param shouldBeBold Whether or not the {@link Mentions}'s text typeface should be bold
+         *                     for users that have been @'ed
+         */
+        public Builder setMentionsToBold(boolean shouldBeBold) {
+            mentionsLib.mentionInsertionLogic.setMentionsToBold(shouldBeBold);
+            return this;
+        }
+
+        /**
+         * Set the mentions name to a Italic Typeface. Defaults to false
+         * Note, this does work in conjunction with {@link #setMentionsToBold(boolean)}
+         *
+         * @param shouldBeItalic Whether or not the {@link Mentions}'s text typeface should be italic
+         *                     for users that have been @'ed
+         */
+        public Builder setMentionsToItalic(boolean shouldBeItalic) {
+            mentionsLib.mentionInsertionLogic.setMentionsToItalic(shouldBeItalic);
+            return this;
+        }
+	
+        /**
          * Set the maximum number of characters the user may have typed until the search text
          * is invalid.
          *

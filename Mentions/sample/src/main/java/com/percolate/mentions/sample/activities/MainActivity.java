@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements QueryListener, Su
         mentions = new Mentions.Builder(this, commentField)
                 .suggestionsListener(this)
                 .queryListener(this)
+		        .highlightColor(ContextCompat.getColor(this, android.R.color.black))
+		        .setMentionsToBold(true)
+		        .setMentionsToItalic(true)
                 .build();
         mentionsLoaderUtils = new MentionsLoaderUtils(this);
     }
